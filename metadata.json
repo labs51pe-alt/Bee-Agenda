@@ -1,0 +1,8 @@
+{
+  "name": "Bee – sistema de agenda",
+  "description": "A comprehensive appointment management system for medical clinics, featuring an administrative dashboard and a patient-facing booking portal with real-time availability.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

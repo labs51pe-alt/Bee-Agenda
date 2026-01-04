@@ -47,12 +47,11 @@ const App: React.FC = () => {
 
   const playNotificationSound = () => {
     try {
-      // Uso de un sonido de notificación premium (Ding sutil)
       const audio = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
-      audio.volume = 0.5;
-      audio.play().catch(e => console.log('Auto-play blocked, interaction required.'));
+      audio.volume = 0.4;
+      audio.play().catch(e => console.log('Audio error or blocked'));
     } catch (e) {
-      console.log('Audio playback prevented by browser policy');
+      console.log('Audio playback prevented');
     }
   };
 
@@ -68,25 +67,25 @@ const App: React.FC = () => {
   const handleNewAppointment = (newApp: Appointment) => {
     setAppointments(prev => [newApp, ...prev]);
     playNotificationSound();
-    setNotification({show: true, msg: `¡Nueva reservaBee de ${newApp.patientName.split(' ')[0]}!`});
+    setNotification({show: true, msg: `Nueva reservaBee: ${newApp.patientName.split(' ')[0]}`});
     setTimeout(() => setNotification({show: false, msg: ''}), 6000);
   };
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#FDFDFD]">
-      {/* Alerta Visual Bee de Alto Impacto */}
+      {/* Alerta Visual Bee Técnica */}
       {notification.show && (
-        <div className="fixed top-12 right-12 z-[1000] animate-fade-in pointer-events-auto">
-          <div className="bg-brand-navy text-white px-10 py-6 rounded-[2rem] shadow-[0_30px_60px_-15px_rgba(13,13,75,0.4)] border-2 border-white/20 flex items-center gap-6 backdrop-blur-2xl ring-8 ring-brand-teal/5">
-            <div className="w-14 h-14 bg-brand-teal rounded-2xl flex items-center justify-center animate-bounce shadow-xl">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <div className="fixed top-10 right-10 z-[1000] animate-fade-in pointer-events-auto">
+          <div className="bg-brand-navy text-white px-8 py-5 rounded-xl shadow-2xl border border-white/10 flex items-center gap-5 backdrop-blur-2xl ring-4 ring-brand-teal/5">
+            <div className="w-12 h-12 bg-brand-teal rounded-lg flex items-center justify-center animate-bounce shadow-xl">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             </div>
             <div className="flex flex-col">
-               <span className="text-[11px] font-black text-brand-teal uppercase tracking-[0.4em] mb-1">Aviso de Agenda</span>
-               <span className="text-base font-ubuntu-bold tracking-tight">{notification.msg}</span>
+               <span className="text-[10px] font-black text-brand-teal uppercase tracking-[0.3em] mb-1">Update Agenda</span>
+               <span className="text-sm font-ubuntu-bold tracking-tight">{notification.msg}</span>
             </div>
-            <button onClick={() => setNotification({show: false, msg: ''})} className="ml-6 p-2.5 hover:bg-white/10 rounded-xl transition-all">
-               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            <button onClick={() => setNotification({show: false, msg: ''})} className="ml-4 p-2 hover:bg-white/10 rounded transition-all">
+               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3"><path d="M18 6L6 18M6 6l12 12"/></svg>
             </button>
           </div>
         </div>
@@ -101,9 +100,9 @@ const App: React.FC = () => {
           <div className="relative">
             <button 
               onClick={() => setView('admin')}
-              className="fixed top-10 left-10 z-[100] bg-white shadow-2xl px-10 py-5 rounded-[2rem] text-[12px] font-black uppercase tracking-[0.3em] flex items-center gap-4 border-2 border-gray-50 hover:bg-brand-teal hover:text-white transition-all transform hover:scale-105 active:scale-95"
+              className="fixed top-8 left-8 z-[100] bg-white shadow-xl px-8 py-4 rounded-lg text-[11px] font-black uppercase tracking-[0.3em] flex items-center gap-4 border border-gray-100 hover:bg-brand-teal hover:text-white transition-all transform active:scale-95"
             >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
               SISTEMA BEE
             </button>
             <BookingPortal 

@@ -60,6 +60,7 @@ export interface Treatment {
   sessions: number;
   price: number;
   description: string;
+  patientId?: string;
 }
 
 export interface Medication {
